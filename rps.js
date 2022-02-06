@@ -14,31 +14,37 @@ function computerPlay() {
 
 }
 
-function disableButtons() {
+/*function disableButtons() {
     buttons.forEach(elem => {
-        elem.disabled = true;
+        elem.disabled = false;
     })
 }
-
+*/
 function playRound(playerSelection, computerSelection) { 
      computerSelection = computerPlay();
     if (playerSelection === computerSelection) {
-        roundWinner = 'It\'s a tie';
+        console.log(roundWinner = 'It\'s a tie');
     } else if (
         (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
         (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
         (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')
     ) {
         playerScore++;
-       roundWinner = `You win! ${playerSelection} beats ${computerSelection}`;
+       console.log(roundWinner = `You win! ${playerSelection} beats ${computerSelection}`);
     } else {
         computerScore++;
-       roundWinner = `You lose! ${computerSelection} beats ${playerSelection}`;
+       console.log(roundWinner = `You lose! ${computerSelection} beats ${playerSelection}`);
     }
+    endGame();
 }  
 
 function endGame() {
-    return playerScore = 5 || computerScore = 5)  
-}
+   if (playerScore == 5) {
+       console.log("Player is the winner!")
+   } else if (computerScore == 5) {
+       console.log("Computer is the Winner!")
+   }
 
-function 
+};
+ playRound("ROCK", computerPlay());
+
