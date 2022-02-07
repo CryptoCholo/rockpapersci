@@ -1,6 +1,7 @@
 let playerScore = 0;
 let computerScore = 0;
-let roundWinner = '';
+const buttons = document.querySelectorAll('input');
+
 
 function computerPlay() {
     switch(Math.floor(Math.random() * 3)) {
@@ -14,37 +15,44 @@ function computerPlay() {
 
 }
 
-/*function disableButtons() {
+function disableButtons() {
     buttons.forEach(elem => {
-        elem.disabled = false;
+        elem.disabled = true;
     })
 }
-*/
+
 function playRound(playerSelection, computerSelection) { 
+    let roundWinner = '';
      computerSelection = computerPlay();
     if (playerSelection === computerSelection) {
-        console.log(roundWinner = 'It\'s a tie');
+        roundWinner = 'It\'s a tie';
     } else if (
         (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
         (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
         (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')
     ) {
         playerScore++;
-       console.log(roundWinner = `You win! ${playerSelection} beats ${computerSelection}`);
+       roundWinner = `You win! ${playerSelection} beats ${computerSelection}
+        <br><br> player Score: ${playerScore} <br> computer Score: ${computerScore}`;
+       if (playerScore == 5) {
+       roundWinner += '<br> YOU WIN!! <br> RELOAD TO PLAY AGAIN!';
+        disableButtons();
+       }
     } else {
         computerScore++;
-       console.log(roundWinner = `You lose! ${computerSelection} beats ${playerSelection}`);
+       roundWinner = `You lose! ${computerSelection} beats ${playerSelection}
+       <br><br> player Score: ${playerScore} <br> computer Score: ${computerScore}`;
+       if (computerScore == 5) {
+        roundWinner += '<br>YOU LOSE!! <br> RELOAD TO PLAY AGAIN!';
+        disableButtons();
+        }
     }
-    endGame();
+    document.getElementById('outcome').innerHTML = roundWinner;
+    return
 }  
 
-function endGame() {
-   if (playerScore == 5) {
-       console.log("Player is the winner!")
-   } else if (computerScore == 5) {
-       console.log("Computer is the Winner!")
-   }
-
-};
- playRound("ROCK", computerPlay());
-
+buttons.forEach(button => {
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
